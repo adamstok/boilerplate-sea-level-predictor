@@ -13,7 +13,21 @@ def draw_plot():
 
     # Create first line of best fit
     res = linregress(x, y)
-    plt.plot(x, res.intercept + res.slope*x, 'r')
+    newx = []
+    for i in range(1880, 2051):
+        newx.append(i)
+    newy = []
+    for i in range(len(y)):
+        newy.append(y[i])
+    for i in range(37):
+        newy.append(newy[-1]/res.value)
+    
+    new_df = {'x': newx, 'y':newy}
+    new_df_pd = pd.DataFrame(new_df)
+    new_res = linregress(new_df_pd['x'], new_df_pd['y'])
+
+
+    plt.plot(new_df_pd['x'], new_res.intercept + new_res.slope*new_df_pd['x'], 'r')
 
     # Create second line of best fit
 
