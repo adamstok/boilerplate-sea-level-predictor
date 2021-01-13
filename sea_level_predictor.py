@@ -12,7 +12,8 @@ def draw_plot():
     plt.plot(x, y, 'o')
 
     # Create first line of best fit
-    
+    res = linregress(x, y)
+    plt.plot(x, res.intercept + res.slope*x, 'r')
 
     # Create second line of best fit
 
